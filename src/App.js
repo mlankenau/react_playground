@@ -4,6 +4,23 @@ import {Table} from './Table.js';
 import * as Field from './Fields.js';
 import './App.css';
 
+class ActionButton extends Component {
+  click() {
+    console.log("clicked on row: ", this.props.row)
+    if (this.props.onClick)
+      this.props.onClick(this.props.value)
+  }
+
+  render() {
+    return (
+      <button onClick={this.click.bind(this)}>
+        {this.props.children}
+      </button>
+    )
+  }
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -49,9 +66,10 @@ class App extends Component {
         </Form>
 
         <Table edit={true} value={this.state.list} onChange={(val) => this.setState({list: val})}>
-          <Field.TextField label="Hersteller" attr="maker" />   
-          <Field.TextField label="Modell" attr="model" />   
-          <Field.IntField label="Laufleistung" attr="mileage" />   
+          <Field.TextField label="Hersteller" attr="maker" />
+          <Field.TextField label="Modell" attr="model" />
+          <Field.IntField label="Laufleistung" attr="mileage" />
+          <ActionButton>Some Action</ActionButton>
         </Table>
       </div>
     );

@@ -12,6 +12,7 @@ class Table extends Component {
   childrenWithProps(row, idx) {
     return React.Children.map(this.props.children, function(child) {
       return React.cloneElement(child, {
+        row: row,
         value: row[child.props.attr],
         onChange: (newValue) => this.changeAttribute(idx, child.props.attr, newValue),
         edit: this.props.edit
@@ -56,7 +57,7 @@ class Table extends Component {
   render(children) {
     let rows = this.renderRows()
     return (
-      <table>
+      <table className="table">
         <thead>
           { this.renderHeader() }
         </thead>
