@@ -33,7 +33,6 @@ class Table extends Component {
 
   renderRow(obj, idx) {
     return React.Children.map(this.childrenWithProps(obj, idx), (child) => {
-      console.log("child", child)
       return (
         <td>
           {child}

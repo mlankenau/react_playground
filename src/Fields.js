@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 
+
+const RenderTextInput = (props) => {
+  return (
+    <div>
+      <input type="text" className={props.className} onChange={props.onChange} value={props.value}/>
+    </div>
+  )
+}
+
 class Field extends Component {
   renderShow() {
     return (
@@ -22,11 +31,12 @@ class TextField extends Field {
       this.props.onChange(e.target.value)
   }
   renderEdit() {
-    return (
-      <div>
-        <input type="text" className="form-control" onChange={this.onChange.bind(this)} value={this.props.value}/>
-      </div>
-    )
+    const props = {
+      className: "form-control",
+      onChange: this.onChange.bind(this),
+      value: this.props.value
+    }
+    return <RenderTextInput {...props}/>
   }
 }
 
@@ -47,11 +57,12 @@ class IntField extends Field {
     }
   }
   renderEdit() {
-    return (
-      <div>
-        <input type="text" className={this.state.cls + " form-control"} onChange={this.onChange.bind(this)} value={this.state.value}/>
-      </div>
-    )
+    const props = {
+      className: this.state.cls + " form-control",
+      onChange: this.onChange.bind(this),
+      value: this.state.value
+    }
+    return <RenderTextInput {...props}/>
   }
 }
 
