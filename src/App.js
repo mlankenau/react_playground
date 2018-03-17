@@ -3,6 +3,9 @@ import {Form} from './Form.js';
 import {Table} from './Table.js';
 import * as Field from './Fields.js';
 import './App.css';
+import moment from 'moment';
+import Calendar from './Calendar'
+
 
 class ActionButton extends Component {
   click() {
@@ -20,11 +23,11 @@ class ActionButton extends Component {
   }
 }
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      day: moment(),
       auction: {
         id: 123,
         maker: "Volkswagen",
@@ -58,7 +61,7 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Form example</h1>
-
+        <Calendar value={this.state.day} onChange={(d) => this.setState({day: d})}/>
         <Form edit={true} value={this.state.auction} onChange={(val) => this.setState({auction: val})}>
           <Field.TextField label="Hersteller" attr="maker" />   
           <Field.TextField label="Modell" attr="model" />   
