@@ -22,7 +22,6 @@ class ActionButton extends Component {
     )
   }
 }
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,8 @@ class App extends Component {
         id: 123,
         maker: "Volkswagen",
         model: "Golf",
-        mileage: 90000
+        mileage: 90000,
+        //registration_date: '2008-08-01'
       },
       list: [
         {
@@ -61,19 +61,19 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Form example</h1>
-        <Calendar value={this.state.day} onChange={(d) => this.setState({day: d})}/>
-        <Form edit={true} value={this.state.auction} onChange={(val) => this.setState({auction: val})}>
-          <Field.TextField label="Hersteller" attr="maker" />   
-          <Field.TextField label="Modell" attr="model" />   
-          <Field.IntField label="Laufleistung" attr="mileage" />   
-        </Form>
-
         <Table edit={true} value={this.state.list} onChange={(val) => this.setState({list: val})}>
           <Field.TextField label="Hersteller" attr="maker" />
           <Field.TextField label="Modell" attr="model" />
           <Field.IntField label="Laufleistung" attr="mileage" />
           <ActionButton>Some Action</ActionButton>
         </Table>
+        <Form edit={true} value={this.state.auction} onChange={(val) => this.setState({auction: val})}>
+          <Field.TextField label="Hersteller" attr="maker" />   
+          <Field.TextField label="Modell" attr="model" />   
+          <Field.IntField label="Laufleistung" attr="mileage" />   
+          <Field.DateField label="Erstzulassung" attr="registration_date" />   
+        </Form>
+
       </div>
     );
   }

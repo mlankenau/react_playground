@@ -29,7 +29,7 @@ const Day = ({value, currentDay, onSelectDay}) => {
   else if (value.month() != currentDay.month())
     className = 'day-other'
 
-  return <div
+  return <div key={'' + value.date() + '_' + value.month()}
     onClick={(e) => onSelectDay(value)}
     className={className}>
       {value.date()}
@@ -42,7 +42,6 @@ class Calendar extends Component {
   }
 
   onSelectDay(day) {
-    console.log("select", day)
     if (this.props.onChange)
       this.props.onChange(day)
   }
@@ -65,7 +64,7 @@ class Calendar extends Component {
     while (!finished) {
       days.push(day)
       day = day.clone().add(1, 'd')
-      if (this.totalMonths(day) > this.totalMonths(this.props.value))
+      if (this.totalMonths(day) > this.totalMonths(date))
         reachedLastDayOfMonth = true
       if (day.day() == 1 && reachedLastDayOfMonth)
         finished = true
@@ -73,19 +72,23 @@ class Calendar extends Component {
     return days
   }
 
+  currentDate() {
+    return this.props.value || moment()
+  }
+
   render() {
     const weekDays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
-    const days = this.daysToDisplay(this.props.value)
+    const days = this.daysToDisplay(this.currentDate())
     return <div className="calendar">
       <div className=''>
-        <MonthSelector value={this.props.value} onChange={this.props.onChange}/>
-        <YearSelector value={this.props.value} onChange={this.props.onChange}/>
+        <MonthSelector value={this.currentDate()} onChange={this.props.onChange}/>
+        <YearSelector value={this.currentDate()} onChange={this.props.onChange}/>
       </div>
       <div className="week-days">
-        {weekDays.map((wday) => <div className="week-day">{wday}</div> )}
+        {weekDays.map((wday) => <div className="week-day" key={wday}>{wday}</div> )}
       </div>
-      {days.map((d) => <Day value={d} currentDay={this.props.value} onSelectDay={(e) => this.onSelectDay(d)}/>)}
+      {days.map((d) => <Day key={''+d.date()+'_'+d.month()} value={d} currentDay={this.currentDate()} onSelectDay={(e) => this.onSelectDay(d)}/>)}
     </div>
   } 
 }

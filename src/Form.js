@@ -5,14 +5,15 @@ class Form extends Component {
     return (
       <div className="form-group row">
         <label className="col-sm-2 col-form-label">{field.props.label}</label>
-        {field}
+        <div>
+          {field}
+        </div>
       </div>
     )
   }
   changeAttribute(attribute, value) {
     let newValue = Object.assign({}, this.props.value)
     newValue[attribute] = value
-    console.log("form data change", newValue)
     if (this.props.onChange)
       this.props.onChange(newValue)
   }
