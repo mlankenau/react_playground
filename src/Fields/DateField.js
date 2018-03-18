@@ -26,15 +26,21 @@ class DateField extends Field {
     )
   }
   onChange(e) {
-    const date = moment(e.target.value, "DD.MM.YYYY", true)
-    if (date.isValid()) {
-      this.setState({value: e.target.value, cls: "valid"})
+    const newText = e.target.value
+    const date = moment(newText, "DD.MM.YYYY", true)
+    if (newText.trim() === '') {
+      this.setState({value: newText, cls: "valid"})
+      if (this.props.onChange)
+        this.props.onChange(null)
+    }
+    else if (date.isValid()) {
+      this.setState({value: newText, cls: "valid"})
       if (this.props.onChange)
         this.props.onChange(date.format('YYYY-MM-DD'))
     }
     else
     {
-      this.setState({value: e.target.value, cls: "is-invalid "})
+      this.setState({value: newText, cls: "is-invalid "})
     }
   }
   onChangeCal(d) {

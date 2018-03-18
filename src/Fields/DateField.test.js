@@ -38,4 +38,11 @@ it('invalid change', () => {
   expect(mockOnChange.mock.calls.length).toBe(0);
 });
 
+it('change to null (empty text)', () => {
+  const mockOnChange = jest.fn();
+  const wrapper = mount(<DateField edit={true} value={'11.05.2014'} onChange={mockOnChange}/>)
+  wrapper.find('input').simulate('change', { target: { value: '' }})
+  expect(mockOnChange).toHaveBeenCalledWith(null);
+});
+
 
