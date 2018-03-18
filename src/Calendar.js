@@ -24,9 +24,9 @@ const MonthSelector = ({value, onChange}) => {
 
 const Day = ({value, currentDay, onSelectDay}) => {
   let className = 'day'
-  if (value.date() == currentDay.date() && value.month() == currentDay.month())
+  if (value.date() === currentDay.date() && value.month() === currentDay.month())
     className = 'current-day'
-  else if (value.month() != currentDay.month())
+  else if (value.month() !== currentDay.month())
     className = 'day-other'
 
   return <div key={'' + value.date() + '_' + value.month()}
@@ -37,10 +37,6 @@ const Day = ({value, currentDay, onSelectDay}) => {
 }
 
 class Calendar extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   onSelectDay(day) {
     if (this.props.onChange)
       this.props.onChange(day)
@@ -61,19 +57,30 @@ class Calendar extends Component {
     let day = firstDay
     let finished = false;
     let reachedLastDayOfMonth = false
-    while (!finished) {
+    let i = 0
+    while (!finished && i < 50) {
       days.push(day)
       day = day.clone().add(1, 'd')
       if (this.totalMonths(day) > this.totalMonths(date))
         reachedLastDayOfMonth = true
-      if (day.day() == 1 && reachedLastDayOfMonth)
+      if (day.day() === 1 && reachedLastDayOfMonth)
         finished = true
+      i = i + 1
     }
     return days
   }
 
   currentDate() {
-    return this.props.value || moment()
+    if (this.props.value) {
+      if (this.props.value.isValid())
+        return this.props.value
+      else
+        return moment()
+    }
+    else
+    {
+      return moment()
+    }
   }
 
   render() {

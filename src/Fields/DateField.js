@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {Field} from './Field'
 import {RenderTextInput} from './TextField'
 import Calendar from '../Calendar'

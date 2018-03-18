@@ -4,7 +4,6 @@ import {Table} from './Table.js';
 import * as Field from './Fields.js';
 import './App.css';
 import moment from 'moment';
-import Calendar from './Calendar'
 
 
 class ActionButton extends Component {

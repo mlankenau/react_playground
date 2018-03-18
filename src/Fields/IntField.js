@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {Field} from './Field'
 import {RenderTextInput} from './TextField'
 
@@ -11,7 +11,7 @@ class IntField extends Field {
     if (e.target.value.match(/^ *\d* *$/)) {
       this.setState({value: e.target.value, cls: "valid"})
       if (this.props.onChange)
-        this.props.onChange(parseInt(e.target.value))
+        this.props.onChange(parseInt(e.target.value, 10))
     }
     else
     {

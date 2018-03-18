@@ -23,7 +23,7 @@ class Table extends Component {
   renderHeader() {
     let header = React.Children.map(this.props.children, function(child) {
             return <th>{child.props.label}</th>
-          }.bind(this))
+          })
     return (
       <tr>
         {header}
